@@ -6,11 +6,12 @@ import {
   collection,
   getDocs,
 } from "firebase/firestore";
+import timetableData from "@/data/timetable.json";
 import React from "react";
 
 export default function useAttedance() {
   // Function to update attendance for all users based on the current day
-  const updateAttendanceForAllUsers = async (timetableData) => {
+  const updateAttendanceForAllUsers = async () => {
     const daysOfWeek = [
       "Sunday",
       "Monday",

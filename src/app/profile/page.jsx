@@ -4,6 +4,7 @@ import React from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import { useAuth } from "@/hooks/useAuth";
+
 import Loading from "@/components/Loading";
 import { useRouter } from "next/navigation"; // Make sure useRouter is imported
 import useAttedance from "@/hooks/useAttedance";
@@ -81,7 +82,7 @@ export default function Profile() {
 
         {loginuser.name == "Nishant" ? (
           <button
-            onClick={updateAttendanceForAllUsers}
+            onClick={async () => await updateAttendanceForAllUsers()}
             className="mb-6 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
           >
             Logout
