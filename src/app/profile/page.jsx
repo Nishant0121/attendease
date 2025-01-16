@@ -6,6 +6,7 @@ import { Pie } from "react-chartjs-2";
 import { useAuth } from "@/hooks/useAuth";
 import Loading from "@/components/Loading";
 import { useRouter } from "next/navigation"; // Make sure useRouter is imported
+import useAttedance from "@/hooks/useAttedance";
 
 // Register the necessary Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -13,6 +14,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 export default function Profile() {
   const { loginuser, loading, logout } = useAuth(); // Assuming `logout` is available from useAuth hook
   const router = useRouter();
+  const { updateAttendanceForAllUsers } = useAttedance();
 
   // Redirect to login if no user is found
   if (loading) {
@@ -76,6 +78,17 @@ export default function Profile() {
         >
           Logout
         </button>
+
+        {loginuser.name == "Nishant" ? (
+          <button
+            onClick={updateAttendanceForAllUsers}
+            className="mb-6 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+          >
+            Logout
+          </button>
+        ) : (
+          ""
+        )}
 
         <div className="mb-6">
           <h2 className="text-2xl font-semibold text-gray-700">
