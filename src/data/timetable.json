@@ -1,0 +1,186 @@
+{
+  "branch": "Information Technology",
+  "division": "S2",
+  "batches": [
+    {
+      "batch": "S21",
+      "timetable": [
+        {
+          "dayOfWeek": "Monday",
+          "schedule": [
+            { "time": "8:30 - 9:30", "subject": "Remedial Lecture" },
+            { "time": "9:30 - 10:30", "subject": "Remedial Lecture" },
+            { "time": "10:30 - 11:30", "subject": "EM-IV" },
+            { "time": "11:30 - 12:30", "subject": "AT" },
+            { "time": "1:30 - 2:30", "subject": "OS" },
+            { "time": "2:30 - 4:30", "subject": "UL" }
+          ]
+        },
+        {
+          "dayOfWeek": "Tuesday",
+          "schedule": [
+            { "time": "8:30 - 9:30", "subject": "Remedial Lecture" },
+            { "time": "9:30 - 10:30", "subject": "Mini Project Meet" },
+            { "time": "10:30 - 12:30", "subject": "MPL" },
+            { "time": "1:30 - 2:30", "subject": "COA" },
+            { "time": "2:30 - 3:30", "subject": "EM-IV" },
+            { "time": "3:30 - 4:30", "subject": "CNND" }
+          ]
+        },
+        {
+          "dayOfWeek": "Wednesday",
+          "schedule": [
+            { "time": "8:30 - 9:30", "subject": "Remedial Lecture" },
+            { "time": "9:30 - 10:30", "subject": "Mini Project Meet" },
+            { "time": "10:30 - 11:30", "subject": "CNND" },
+            { "time": "11:30 - 12:30", "subject": "AT" },
+            { "time": "1:30 - 2:30", "subject": "COA" },
+            { "time": "2:30 - 4:30", "subject": "PL" }
+          ]
+        },
+        {
+          "dayOfWeek": "Thursday",
+          "schedule": [
+            { "time": "8:30 - 9:30", "subject": "Remedial Lecture" },
+            { "time": "9:30 - 10:30", "subject": "EM-IV Tutorial" },
+            { "time": "10:30 - 12:30", "subject": "NL" },
+            { "time": "1:30 - 2:30", "subject": "CNND" },
+            { "time": "2:30 - 3:30", "subject": "EM-IV" },
+            { "time": "3:30 - 4:30", "subject": "OS" }
+          ]
+        },
+        {
+          "dayOfWeek": "Friday",
+          "schedule": [
+            { "time": "8:30 - 9:30", "subject": "EM-IV Tutorial" },
+            { "time": "9:30 - 10:30", "subject": "EM-IV Tutorial" },
+            { "time": "10:30 - 11:30", "subject": "AT" },
+            { "time": "11:30 - 12:30", "subject": "OS" },
+            { "time": "1:30 - 2:30", "subject": "COA" },
+            { "time": "2:30 - 4:30", "subject": "PL" }
+          ]
+        }
+      ]
+    },
+    {
+      "batch": "S22",
+      "timetable": [
+        {
+          "dayOfWeek": "Monday",
+          "schedule": [
+            { "time": "8:30 - 9:30", "subject": "Remedial Lecture" },
+            { "time": "9:30 - 10:30", "subject": "Remedial Lecture" },
+            { "time": "10:30 - 11:30", "subject": "EM-IV" },
+            { "time": "11:30 - 12:30", "subject": "AT" },
+            { "time": "1:30 - 2:30", "subject": "OS" },
+            { "time": "2:30 - 4:30", "subject": "PL" }
+          ]
+        },
+        {
+          "dayOfWeek": "Tuesday",
+          "schedule": [
+            { "time": "8:30 - 9:30", "subject": "Remedial Lecture" },
+            { "time": "9:30 - 10:30", "subject": "Mini Project Meet" },
+            { "time": "10:30 - 12:30", "subject": "NL" },
+            { "time": "1:30 - 2:30", "subject": "COA" },
+            { "time": "2:30 - 3:30", "subject": "EM-IV" },
+            { "time": "3:30 - 4:30", "subject": "CNND" }
+          ]
+        },
+        {
+          "dayOfWeek": "Wednesday",
+          "schedule": [
+            { "time": "8:30 - 9:30", "subject": "Remedial Lecture" },
+            { "time": "9:30 - 10:30", "subject": "Mini Project Meet" },
+            { "time": "10:30 - 11:30", "subject": "CNND" },
+            { "time": "11:30 - 12:30", "subject": "AT" },
+            { "time": "1:30 - 2:30", "subject": "COA" },
+            { "time": "2:30 - 4:30", "subject": "UL" }
+          ]
+        },
+        {
+          "dayOfWeek": "Thursday",
+          "schedule": [
+            { "time": "8:30 - 9:30", "subject": "Remedial Lecture" },
+            { "time": "9:30 - 10:30", "subject": "EM-IV Tutorial" },
+            { "time": "10:30 - 12:30", "subject": "PL" },
+            { "time": "1:30 - 2:30", "subject": "CNND" },
+            { "time": "2:30 - 3:30", "subject": "EM-IV" },
+            { "time": "3:30 - 4:30", "subject": "OS" }
+          ]
+        },
+        {
+          "dayOfWeek": "Friday",
+          "schedule": [
+            { "time": "8:30 - 9:30", "subject": "EM-IV Tutorial" },
+            { "time": "9:30 - 10:30", "subject": "EM-IV Tutorial" },
+            { "time": "10:30 - 11:30", "subject": "AT" },
+            { "time": "11:30 - 12:30", "subject": "OS" },
+            { "time": "1:30 - 2:30", "subject": "COA" },
+            { "time": "2:30 - 4:30", "subject": "MPL" }
+          ]
+        }
+      ]
+    },
+    {
+      "batch": "S23",
+      "timetable": [
+        {
+          "dayOfWeek": "Monday",
+          "schedule": [
+            { "time": "8:30 - 9:30", "subject": "Remedial Lecture" },
+            { "time": "9:30 - 10:30", "subject": "Remedial Lecture" },
+            { "time": "10:30 - 11:30", "subject": "EM-IV" },
+            { "time": "11:30 - 12:30", "subject": "AT" },
+            { "time": "1:30 - 2:30", "subject": "OS" },
+            { "time": "2:30 - 4:30", "subject": "PL" }
+          ]
+        },
+        {
+          "dayOfWeek": "Tuesday",
+          "schedule": [
+            { "time": "8:30 - 9:30", "subject": "Remedial Lecture" },
+            { "time": "9:30 - 10:30", "subject": "Mini Project Meet" },
+            { "time": "10:30 - 12:30", "subject": "MPL" },
+            { "time": "1:30 - 2:30", "subject": "COA" },
+            { "time": "2:30 - 3:30", "subject": "EM-IV" },
+            { "time": "3:30 - 4:30", "subject": "CNND" }
+          ]
+        },
+        {
+          "dayOfWeek": "Wednesday",
+          "schedule": [
+            { "time": "8:30 - 9:30", "subject": "Remedial Lecture" },
+            { "time": "9:30 - 10:30", "subject": "Mini Project Meet" },
+            { "time": "10:30 - 11:30", "subject": "CNND" },
+            { "time": "11:30 - 12:30", "subject": "AT" },
+            { "time": "1:30 - 2:30", "subject": "COA" },
+            { "time": "2:30 - 4:30", "subject": "NL" }
+          ]
+        },
+        {
+          "dayOfWeek": "Thursday",
+          "schedule": [
+            { "time": "8:30 - 9:30", "subject": "Remedial Lecture" },
+            { "time": "9:30 - 10:30", "subject": "EM-IV Tutorial" },
+            { "time": "10:30 - 12:30", "subject": "PL" },
+            { "time": "1:30 - 2:30", "subject": "CNND" },
+            { "time": "2:30 - 3:30", "subject": "EM-IV" },
+            { "time": "3:30 - 4:30", "subject": "OS" }
+          ]
+        },
+        {
+          "dayOfWeek": "Friday",
+          "schedule": [
+            { "time": "8:30 - 9:30", "subject": "EM-IV Tutorial" },
+            { "time": "9:30 - 10:30", "subject": "EM-IV Tutorial" },
+            { "time": "10:30 - 11:30", "subject": "AT" },
+            { "time": "11:30 - 12:30", "subject": "OS" },
+            { "time": "1:30 - 2:30", "subject": "COA" },
+            { "time": "2:30 - 4:30", "subject": "UL" }
+          ]
+        }
+      ]
+    }
+  ]
+}
