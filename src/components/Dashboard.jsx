@@ -28,20 +28,13 @@ export default function Dashboard() {
   const router = useRouter();
 
   useEffect(() => {
-    // Redirect to login if not logged in
-
-    // Once the user is logged in, load schedule and attendance
     if (!loading && loginuser) {
       setAuth(true);
-      const today = format(new Date(), "EEEE");
-      loadScheduleForDay(today);
       checkAttendanceForSelectedDate();
-    } else {
-      setAuth(false);
+    } else if (!loading && !loginuser) {
+      router.push("/login");
     }
   }, [loading, loginuser, selectedDate]);
-
-  console.log(JSON.stringify(loginuser));
 
   const loadScheduleForDay = (dayOfWeek) => {
     if (!loginuser) return;
@@ -58,34 +51,35 @@ export default function Dashboard() {
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
-    const selectedDay = format(date, "EEEE");
-    loadScheduleForDay(selectedDay);
-    checkAttendanceForSelectedDate();
+    checkAttendanceForSelectedDate(); // Refresh attendance when the date changes
   };
 
   const checkAttendanceForSelectedDate = async () => {
     if (!loginuser) return;
 
     try {
-      // Reference to the 'attendance' collection
       const attendanceRef = collection(db, "attendance");
 
-      // Query to check if this user has already updated attendance for the selected date
+      // Convert selectedDate to a date-only ISO string (e.g., "2025-01-16")
+      const dateOnly = format(selectedDate, "yyyy-MM-dd");
+
+      // Query Firestore for attendance records matching the user and date
       const attendanceQuery = query(
         attendanceRef,
         where("userId", "==", loginuser.uid),
-        where("date", "==", selectedDate.toISOString()) // Store date as ISO string
+        where("date", "==", dateOnly) // Match only the date part
       );
 
       const querySnapshot = await getDocs(attendanceQuery);
 
-      // If an attendance record exists for this date
       if (!querySnapshot.empty) {
+        // Attendance exists for this date
         const attendanceDoc = querySnapshot.docs[0].data();
-        setAttendanceUpdated(attendanceDoc.attendance); // Set the updated attendance
-        setTimetable(null); // Hide timetable if attendance is updated
+        setAttendanceUpdated(attendanceDoc.attendance); // Set updated attendance
+        setTimetable(null); // Clear timetable if attendance is already updated
       } else {
-        setAttendanceUpdated(null); // No attendance for this date, show timetable
+        // No attendance found, load timetable for the selected day
+        setAttendanceUpdated(null);
         loadScheduleForDay(format(selectedDate, "EEEE"));
       }
     } catch (error) {
@@ -98,10 +92,8 @@ export default function Dashboard() {
     if (!loginuser || !loginuser.attendance) return;
 
     try {
-      // Reference to the user's document in the 'users' collection
       const userRef = doc(db, "users", loginuser.uid);
 
-      // Update the attendance in the user's profile
       const updatedAttendance = loginuser.attendance.map((subject) => {
         const update = attendanceUpdates.find(
           (u) => u.subject === subject.subject
@@ -115,31 +107,29 @@ export default function Dashboard() {
         return subject;
       });
 
-      // Update the user's attendance field in Firestore
-      await updateDoc(userRef, {
-        attendance: updatedAttendance,
-      });
+      await updateDoc(userRef, { attendance: updatedAttendance });
 
-      // Reference to the attendance collection
       const attendanceRef = collection(db, "attendance");
 
-      // Add or update a document for the attendance record
+      const dateOnly = format(selectedDate, "yyyy-MM-dd"); // Ensure date-only format
+
       const attendanceQuery = query(
         attendanceRef,
         where("userId", "==", loginuser.uid),
-        where("date", "==", selectedDate.toISOString())
+        where("date", "==", dateOnly)
       );
+
       const querySnapshot = await getDocs(attendanceQuery);
 
       if (querySnapshot.empty) {
-        // No record exists for this date, so add a new one
+        // Add a new attendance record
         await addDoc(attendanceRef, {
           userId: loginuser.uid,
-          date: selectedDate.toISOString(),
+          date: dateOnly,
           attendance: attendanceUpdates,
         });
       } else {
-        // Update existing record for this date
+        // Update existing record
         const docRef = querySnapshot.docs[0].ref;
         await updateDoc(docRef, {
           attendance: attendanceUpdates,
@@ -147,7 +137,7 @@ export default function Dashboard() {
       }
 
       alert("Attendance saved successfully!");
-      checkAttendanceForSelectedDate(); // Refresh attendance after saving
+      checkAttendanceForSelectedDate(); // Refresh attendance
     } catch (error) {
       console.error("Error saving attendance:", error);
       alert("Failed to save attendance. Please try again.");
@@ -160,6 +150,7 @@ export default function Dashboard() {
 
   if (!loginuser) {
     router.push("/login");
+    return null;
   }
 
   return (
@@ -175,7 +166,7 @@ export default function Dashboard() {
 
       {attendanceUpdated ? (
         <div>
-          <h2>Updated Attendance for {format(selectedDate, "MMMM d, yyyy")}</h2>
+          <h2>Attendance Updated for {format(selectedDate, "MMMM d, yyyy")}</h2>
           <ul>
             {attendanceUpdated.map((subject) => (
               <li key={subject.subject}>
