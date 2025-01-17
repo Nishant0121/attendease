@@ -72,19 +72,21 @@ export default function Profile() {
   };
 
   return (
-    <div className="p-8 bg-gray-100 min-h-screen">
+    <div className="p-8 bg-gray-100 min-h-screen hide-scrollbar">
       <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">Profile</h1>
+        <header className=" flex justify-between">
+          <h1 className="text-3xl font-bold text-gray-800 mb-4">Profile</h1>
 
-        {/* Logout Button */}
-        <button
-          onClick={handleLogout}
-          className="mb-6 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
-        >
-          Logout
-        </button>
+          {/* Logout Button */}
+          <button
+            onClick={handleLogout}
+            className="mb-6 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+          >
+            Logout
+          </button>
+        </header>
 
-        {loginuser.name == "Nishant" ? (
+        {/* {loginuser.name == "Nishant" ? (
           <button
             onClick={async () => await updateAttendanceForAllUsers()}
             className="mb-6 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
@@ -93,7 +95,7 @@ export default function Profile() {
           </button>
         ) : (
           ""
-        )}
+        )} */}
 
         <div className="mb-6">
           <h2 className="text-2xl font-semibold text-gray-700">

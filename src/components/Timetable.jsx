@@ -28,26 +28,36 @@ export default function Timetable({ schedule, onSaveAttendance }) {
   };
 
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full bg-white border border-zinc-200 dark:border-zinc-800">
+    <div className="overflow-x-auto mt-6">
+      <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-900 dark:border-gray-700">
         <thead>
-          <tr className="bg-gray-100">
-            <th className="py-2 px-4 border-b">Time</th>
-            <th className="py-2 px-4 border-b">Subject</th>
-            <th className="py-2 px-4 border-b">Attendance</th>
+          <tr className="bg-gray-100 dark:bg-gray-700">
+            <th className="py-3 px-5 text-left text-gray-700 font-semibold border-b dark:text-gray-300">
+              Time
+            </th>
+            <th className="py-3 px-5 text-left text-gray-700 font-semibold border-b dark:text-gray-300">
+              Subject
+            </th>
+            <th className="py-3 px-5 text-center text-gray-700 font-semibold border-b dark:text-gray-300">
+              Attendance
+            </th>
           </tr>
         </thead>
         <tbody>
           {schedule.map((item, index) => (
-            <tr key={index} className="hover:bg-gray-50">
-              <td className="py-2 px-4 border-b">{item.time}</td>
-              <td className="py-2 px-4 border-b">{item.subject}</td>
-              <td className="py-2 px-4 border-b">
+            <tr key={index} className="hover:bg-gray-50 dark:hover:bg-gray-800">
+              <td className="py-3 px-5 border-b dark:border-gray-700 text-gray-700 dark:text-gray-300">
+                {item.time}
+              </td>
+              <td className="py-3 px-5 border-b dark:border-gray-700 text-gray-700 dark:text-gray-300">
+                {item.subject}
+              </td>
+              <td className="py-3 px-5 border-b dark:border-gray-700 text-center">
                 <input
                   type="checkbox"
                   checked={attendance[item.subject]?.attended || false}
                   onChange={() => handleCheckboxChange(index, item.subject)}
-                  className="form-checkbox h-5 w-5 text-blue-600"
+                  className="form-checkbox h-5 w-5 text-blue-600 focus:ring-2 focus:ring-blue-500 rounded dark:focus:ring-blue-400"
                 />
               </td>
             </tr>
@@ -56,7 +66,7 @@ export default function Timetable({ schedule, onSaveAttendance }) {
       </table>
       <button
         onClick={handleSave}
-        className="mt-4 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+        className="mt-6 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-200"
       >
         Save Attendance
       </button>

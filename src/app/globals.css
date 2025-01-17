@@ -4,8 +4,15 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  scrollbar-width: none;
+}
+html {
+  scrollbar-width: none;
 }
 
+hide-scrollbar {
+  scrollbar-width: none;
+}
 @layer base {
   :root {
     --radius: 0.5rem;

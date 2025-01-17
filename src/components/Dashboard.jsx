@@ -22,6 +22,7 @@ import useAttedance from "@/hooks/useAttedance";
 
 export default function Dashboard() {
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [day, setDay] = useState("");
   const [timetable, setTimetable] = useState(null);
   const [auth, setAuth] = useState(false);
   const [attendanceUpdated, setAttendanceUpdated] = useState(null);
@@ -194,22 +195,32 @@ export default function Dashboard() {
 
   return (
     <div>
-      <div className="mb-4">
+      <div className="mb-6 mx-auto flex items-center justify-center max-w-[1000px]">
         <DatePicker
           selected={selectedDate}
           onChange={handleDateChange}
           dateFormat="MMMM d, yyyy"
-          className="p-2 border border-zinc-200 rounded dark:border-zinc-800"
+          className="p-3 border border-gray-300 rounded-lg shadow-sm bg-white text-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:ring-blue-400"
         />
       </div>
 
       {attendanceUpdated ? (
-        <div>
-          <h2>Attendance Updated for {format(selectedDate, "MMMM d, yyyy")}</h2>
-          <ul>
+        <div className="max-w-[800px] mx-auto p-6 bg-white rounded-lg shadow-md">
+          <h2 className="text-2xl font-semibold text-center text-gray-800 mb-4">
+            Attendance Updated for {format(selectedDate, "MMMM d, yyyy")}
+          </h2>
+          <ul className="space-y-2">
             {attendanceUpdated.map((subject) => (
-              <li key={subject.subject}>
-                {subject.subject}: {subject.attended}/{subject.total}
+              <li
+                key={subject.subject}
+                className="flex justify-between items-center p-3 bg-gray-100 rounded-lg border border-gray-200"
+              >
+                <span className="text-lg font-medium text-gray-700">
+                  {subject.subject}
+                </span>
+                <span className="text-lg font-semibold text-blue-600">
+                  {subject.attended}/{subject.total}
+                </span>
               </li>
             ))}
           </ul>
@@ -219,8 +230,18 @@ export default function Dashboard() {
           schedule={timetable.schedule}
           onSaveAttendance={handleAttendanceSave}
         />
+      ) : format(selectedDate, "EEEE") === "Sunday" ||
+        format(selectedDate, "EEEE") === "Saturday" ? (
+        <p className="text-center text-lg font-semibold text-gray-700 dark:text-gray-300">
+          Bro, it’s a holiday! Just enjoy...!!
+          <span className="block text-blue-500 text-sm mt-1">
+            "Attendance..... ye sab moh maya hai!"
+          </span>
+        </p>
       ) : (
-        <p>No schedule available for the selected date.</p>
+        <p className="text-center text-gray-500">
+          No timetable available for the selected date.
+        </p>
       )}
     </div>
   );
