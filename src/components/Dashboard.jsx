@@ -18,6 +18,7 @@ import {
   addDoc,
 } from "firebase/firestore";
 import { useRouter } from "next/navigation";
+import useAttedance from "@/hooks/useAttedance";
 
 export default function Dashboard() {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -26,6 +27,7 @@ export default function Dashboard() {
   const [attendanceUpdated, setAttendanceUpdated] = useState(null);
   const { loginuser, loading, logOut } = useAuth();
   const router = useRouter();
+  const { updateAttendanceForUser } = useAttedance();
 
   useEffect(() => {
     if (!loading && loginuser) {
@@ -35,6 +37,8 @@ export default function Dashboard() {
       router.push("/login");
     }
   }, [loading, loginuser, selectedDate]);
+
+  console.log(JSON.stringify(loginuser));
 
   const loadScheduleForDay = (dayOfWeek) => {
     if (!loginuser) return;
@@ -94,24 +98,59 @@ export default function Dashboard() {
     try {
       const userRef = doc(db, "users", loginuser.uid);
 
-      const updatedAttendance = loginuser.attendance.map((subject) => {
-        const update = attendanceUpdates.find(
-          (u) => u.subject === subject.subject
+      // Update total count for all subjects scheduled for the selected day
+      const selectedDay = format(selectedDate, "EEEE");
+      const batch = data.batches.find((b) => b.batch === loginuser.batch);
+
+      if (!batch) {
+        console.error("User batch not found in timetable data.");
+        return;
+      }
+
+      const daySchedule = batch.timetable.find(
+        (entry) => entry.dayOfWeek === selectedDay
+      );
+
+      if (!daySchedule) {
+        console.log(`No schedule found for ${selectedDay}.`);
+        return;
+      }
+
+      // Increment the total count for subjects scheduled for the day
+      const updatedAttendance = loginuser.attendance.map((subjectRecord) => {
+        const isScheduled = daySchedule.schedule.some(
+          (session) => session.subject === subjectRecord.subject
         );
-        if (update) {
+        if (isScheduled) {
           return {
-            ...subject,
-            attended: subject.attended + update.attended,
+            ...subjectRecord,
+            total: subjectRecord.total + 1,
           };
         }
-        return subject;
+        return subjectRecord;
       });
 
-      await updateDoc(userRef, { attendance: updatedAttendance });
+      // Update the attended count based on user selections (checkbox values)
+      const finalAttendance = updatedAttendance.map((subjectRecord) => {
+        const update = attendanceUpdates.find(
+          (u) => u.subject === subjectRecord.subject
+        );
+        if (update && update.attended) {
+          return {
+            ...subjectRecord,
+            attended: subjectRecord.attended + 1,
+          };
+        }
+        return subjectRecord;
+      });
 
+      // Save the updated attendance to Firestore
+      await updateDoc(userRef, { attendance: finalAttendance });
+
+      // Also record attendance in the `attendance` collection for the selected day
       const attendanceRef = collection(db, "attendance");
 
-      const dateOnly = format(selectedDate, "yyyy-MM-dd"); // Ensure date-only format
+      const dateOnly = format(selectedDate, "yyyy-MM-dd");
 
       const attendanceQuery = query(
         attendanceRef,
@@ -129,7 +168,7 @@ export default function Dashboard() {
           attendance: attendanceUpdates,
         });
       } else {
-        // Update existing record
+        // Update existing attendance record
         const docRef = querySnapshot.docs[0].ref;
         await updateDoc(docRef, {
           attendance: attendanceUpdates,
