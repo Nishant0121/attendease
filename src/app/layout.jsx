@@ -77,7 +77,7 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/favicon.ico" />
 
         {/* Structured Data for Rich Results */}
-        <script
+        {/* <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
@@ -103,7 +103,7 @@ export default function RootLayout({ children }) {
               },
             }),
           }}
-        />
+        /> */}
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
