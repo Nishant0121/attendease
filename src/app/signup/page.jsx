@@ -173,14 +173,14 @@ export default function Signup() {
             </button>
           </div>
         </form>
-        <div>
+        {/* <div>
           <button
             onClick={handleGoogleSignUp}
             className="group relative w-full flex justify-center py-2 px-4 border border-zinc-200 border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 dark:border-zinc-800"
           >
             Sign up with Google
           </button>
-        </div>
+        </div> */}
         {error && (
           <p className="mt-2 text-center text-sm text-red-600">{error}</p>
         )}
