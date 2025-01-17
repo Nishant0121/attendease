@@ -13,7 +13,7 @@ import useAttedance from "@/hooks/useAttedance";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function Profile() {
-  const { loginuser, loading, logout } = useAuth(); // Assuming `logout` is available from useAuth hook
+  const { loginuser, loading, logOut } = useAuth(); // Assuming `logout` is available from useAuth hook
   const router = useRouter();
   const { updateAttendanceForAllUsers } = useAttedance();
 
@@ -62,9 +62,13 @@ export default function Profile() {
   };
 
   // Logout handler
-  const handleLogout = () => {
-    logout(); // Call the logout function from the useAuth hook
-    router.push("/login"); // Redirect to login page after logout
+  const handleLogout = async () => {
+    try {
+      await logOut(); // Ensure logOut is called as a function
+      router.push("/login"); // Redirect after successful logout
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
   };
 
   return (
